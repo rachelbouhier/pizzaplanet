@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion à Pizza Planet{% endblock %}
+{% block navbar %}{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue chez Pizza Planet</h1>
 
-    {{ form_start(loginFormView) }}
+<h1>Bienvenue chez Pizza Planet</h1>
 
-    {{ form_widget(loginFormView) }}
+{{ form_start(loginFormView) }}
 
-    <button type="submit">Connexion</button>
-    {{ form_end(loginFormView) }}
+{{ form_widget(loginFormView) }}
+
+<button type="submit" class="btn btn-primary btn-sm">Connexion</button>
+{{ form_end(loginFormView) }}
+
 {% endblock %}
