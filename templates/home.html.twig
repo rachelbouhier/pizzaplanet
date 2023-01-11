@@ -4,14 +4,17 @@
 {% block body %}
 <h1 class="pb-5">Nos Pizzas</h1>
 <div class="row">
-    {% for i in 1..3 %}
+    {% for pizza in pizzas %}
         <div class="col">
             <div class="card">
-                <img src="https://picsum.photos/200/200" class="img-fluid" alt="Photo de la pizza">
+                <img src= {{ pizza.photo }} class="img-fluid" alt="Photo de la pizza">
                 <div class="card-body">
-                    <h4 class="card-title">Pizza Mars</h4>
-                    <p class="card-ingredients">Tomates, Basilic, Mozarella</p>
-                    <p class="prix">12 €</p>
+                    <h4 class="card-title">{{ pizza.name }}</h4>
+                    {% for ingredient in pizza.ingredients %}
+                        
+                    {{ ingredient.name }},
+                    {% endfor %}
+                    <p class="prix">{{ pizza.price }}  &euro;</p>
                     <a href="" class="btn btn-primary btn-sm">Commander</a>
                 </div>
             </div>

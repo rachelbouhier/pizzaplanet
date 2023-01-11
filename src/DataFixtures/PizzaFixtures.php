@@ -20,10 +20,9 @@ class PizzaFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $pizzaMars = $this->createPizza($manager, 'Pizza Mars', 12, 'XXX');
-        $pizzaSaturne = $this->createPizza($manager, 'Pizza Saturne', 14, 'XXX');
-        $pizzaLune = $this->createPizza($manager, 'Pizza Lune', 15, 'XXX');
-
+        $pizzaMars = $this->createPizza($manager, 'Pizza Mars', 12, 'https://i.ibb.co/fpFStBJ/Settebello-Margherita-DOC-1.png');
+        $pizzaSaturne = $this->createPizza($manager, 'Pizza Saturne', 14, 'https://i.ibb.co/VpRq83m/shutterstock-225746563.png');
+        $pizzaLune = $this->createPizza($manager, 'Pizza Lune', 15, 'https://i.ibb.co/NVhKbk5/7f0a3782-933f-4f51-83c6-89b60216bc70-1.png');
         $manager->flush();
 
         $pizzaMars = $this->pizza->findOneBy(['name' => 'Pizza Mars']);
@@ -52,7 +51,7 @@ class PizzaFixtures extends Fixture
                 ->addIngredient($goatCheese)
                 ->addIngredient($gratedCheese)
                 ->addIngredient($gorgonzola);
-                
+
         $manager->flush();
     }
 
