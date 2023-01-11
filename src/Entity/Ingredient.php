@@ -101,7 +101,7 @@ class Ingredient
     {
         if (!$this->usersAllergicTo->contains($userAllergicTo)) {
             $this->usersAllergicTo->add($userAllergicTo);
-            $userAllergicTo->addIsAllergicTo($this);
+            $userAllergicTo->addAllergicTo($this);
         }
 
         return $this;
@@ -110,7 +110,7 @@ class Ingredient
     public function removeUserAllergicTo(User $userAllergicTo): self
     {
         if ($this->usersAllergicTo->removeElement($userAllergicTo)) {
-            $userAllergicTo->removeIsAllergicTo($this);
+            $userAllergicTo->removeAllergicTo($this);
         }
 
         return $this;
