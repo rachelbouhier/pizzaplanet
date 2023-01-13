@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Créer un nouvel ingrédient{% endblock %}
+{% block body %}
+    <h1>Nouvel ingrédient</h1>
+
+        {{ form_start(formView) }}
+        {{ form_errors(formView) }}
+
+        <div class="row">
+            <div class="col pb-3">
+                {{ form_row(formView.name) }}
+                <div class="pb-3"></div>
+                {{ form_row(formView.price) }}
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        
+        {{ form_end(formView) }}
+    
+
+
+{% endblock %}
