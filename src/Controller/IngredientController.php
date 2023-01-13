@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\IngredientType;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngredientController extends AbstractController
 {
     #[Route('/admin/ingredient/create', name: 'ingredient_create')]
-    public function create(Request $request, EntityManager $em): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(IngredientType::class);
 
@@ -23,6 +23,8 @@ class IngredientController extends AbstractController
 
             $em->persist($ingredient);
             $em->flush();
+
+            return $this->redirectToRoute('homepage');
         }
 
         $formView = $form->createView();
