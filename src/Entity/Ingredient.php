@@ -24,7 +24,7 @@ class Ingredient
     #[ORM\ManyToMany(targetEntity: Pizza::class, mappedBy: 'ingredients')]
     private Collection $pizzas;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'isAllergicTo')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'allergicTo')]
     private Collection $usersAllergicTo;
 
     public function __construct()

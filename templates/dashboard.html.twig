@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur le dashboard{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>Pizzas</h2>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Ajouter une pizza</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Modifier une pizza</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Supprimer une pizza</button>
+        </div>
+        <div class="col">
+            <h2>Ingrédient</h2>
+            <button type="submit" class="btn btn-primary mt-3" onclick="location.href='/admin/ingredient/create'"/>Ajouter un nouvel ingrédient</button>
+            <div class="mt-4"></div>
+            {{ form_widget(formView.ingredient) }}
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Modifier un ingrédient</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Supprimer un ingrédient</button>
+        </div>
+    </div>
+{% endblock %}
