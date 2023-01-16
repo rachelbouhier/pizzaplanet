@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Form\IngredientType;
+use Doctrine\ORM\Mapping\Id;
+use App\Form\DashboardIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class IngredientController extends AbstractController
 {
@@ -56,6 +57,25 @@ class IngredientController extends AbstractController
         return $this->render('ingredient/edit.html.twig',[
             'ingredient' => $ingredient,
             'formView' => $formView
+        ]);
+    }
+
+    #[Route('/admin/ingredient/{id}/delete', name: 'ingredient_delete')]
+    public function delete(string $id, IngredientRepository $ingredientRepository, EntityManagerInterface $em): Response
+    {
+        $ingredient = $ingredientRepository->find($id);
+        
+        $em->remove($ingredient);
+        $em->flush();
+
+        //     return $this->redirectToRoute('homepage');
+        
+
+        //$formView = $form->createView();
+
+        return $this->render('ingredient/delete.html.twig',[
+            // 'ingredient' => $ingredient,
+            //'formView' => $formView
         ]);
     }
 }

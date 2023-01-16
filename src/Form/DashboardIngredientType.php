@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Ingredient;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DashboardIngredientType extends AbstractType
@@ -14,12 +14,11 @@ class DashboardIngredientType extends AbstractType
     {
         $builder
             ->add('name', EntityType::class, [
-                'label' => 'Nom de l\'ingrédient',
-                'placeholder' => 'Choisir un ingrédient',
-                'class' => Ingredient::class,
-                'choice_label' => 'name'
-                
-            ]);
+            'label' => 'Ajoutez des ingrédients',
+            'placeholder' => 'Choisir les ingrédients',
+            'class' => Ingredient::class,
+            'choice_label' => 'name',
+        ]);;
         
     }
 
