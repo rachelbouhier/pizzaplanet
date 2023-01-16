@@ -14,11 +14,11 @@
         {% endblock %}
     </head>
     <body>
-    <style>img {border: 3px solid red;}</style>
-    <img src="{{ asset('logo.png') }}" class="pt-1"  width="150" height="115">
+        <style>img {border: 3px solid red;}</style>
         {% block navbar %}
             {% include "shared/_navbar.html.twig" %}
         {% endblock %}
+        <img src="{{ asset('logo.png') }}" class="pt-1"  width="150" height="115">
         <div class="container pt-5">
         {% block body %}{% endblock %}
         </div>
