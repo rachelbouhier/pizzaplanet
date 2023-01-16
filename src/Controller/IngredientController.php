@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Form\IngredientType;
-use Doctrine\ORM\Mapping\Id;
-use App\Form\DashboardIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +47,7 @@ class IngredientController extends AbstractController
         if ($form->isSubmitted()) {
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('dashboard_show');
         }
 
         $formView = $form->createView();
@@ -68,7 +66,7 @@ class IngredientController extends AbstractController
         $em->remove($ingredient);
         $em->flush();
 
-        //     return $this->redirectToRoute('homepage');
+        // return $this->redirectToRoute('homepage');
         
 
         //$formView = $form->createView();
