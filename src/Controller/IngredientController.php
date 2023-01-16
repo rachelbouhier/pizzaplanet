@@ -66,14 +66,6 @@ class IngredientController extends AbstractController
         $em->remove($ingredient);
         $em->flush();
 
-        // return $this->redirectToRoute('homepage');
-        
-
-        //$formView = $form->createView();
-
-        return $this->render('ingredient/delete.html.twig',[
-            // 'ingredient' => $ingredient,
-            //'formView' => $formView
-        ]);
+        return $this->redirectToRoute('dashboard_show');
     }
 }

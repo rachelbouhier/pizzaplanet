@@ -18,13 +18,13 @@ class IngredientType extends AbstractType
                 'label' => 'Nom de l\'ingrédient',
                 'attr' => [
                     'placeholder' => 'Tapez le nom de l\'ingrédient'
-                ]
+                ],
             ])
             ->add('price', MoneyType::class, [
                 'label' => 'Prix de l\'ingrédient',
                 'attr' => [
                     'placeholder' => 'Tapez le prix de l\'ingrédient'
-                ]
+                ],
             ]);
         
     }
