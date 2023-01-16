@@ -14,6 +14,7 @@ class DashboardController extends AbstractController
     #[Route('/admin/dashboard', name: 'dashboard_show')]
     public function show(Request $request): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(DashboardIngredientType::class);
 
         $form->handleRequest($request);
@@ -27,7 +28,8 @@ class DashboardController extends AbstractController
         $formView = $form->createView();
 
         return $this->render('dashboard.html.twig', [
-            'formView' => $formView
+            'formView' => $formView,
+            'currentUser' => $user
         ]);
     }
 }

@@ -11,6 +11,10 @@ class OrderController extends AbstractController
     #[Route('/order', name: 'order')]
     public function order(): Response
     {
-        return $this->render('order.html.twig', []);
+        $user = $this->getUser();
+
+        return $this->render('order.html.twig', [
+            'currentUser' => $user
+        ]);
     }
 }

@@ -15,6 +15,7 @@ class IngredientController extends AbstractController
     #[Route('/admin/ingredient/create', name: 'ingredient_create')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(IngredientType::class);
 
         $form->handleRequest($request);
@@ -31,13 +32,16 @@ class IngredientController extends AbstractController
         $formView = $form->createView();
         
         return $this->render('ingredient/create.html.twig', [
-            'formView' => $formView
+            'formView' => $formView,
+            'currentUser' => $user
         ]);
     }
 
     #[Route('/admin/ingredient/{id}/edit', name: 'ingredient_edit')]
     public function edit(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
     {
+        $user = $this->getUser();
+
         $ingredient = $ingredientRepository->find($id);
 
         $form = $this->createForm(IngredientType::class, $ingredient);
@@ -54,6 +58,7 @@ class IngredientController extends AbstractController
 
         return $this->render('ingredient/edit.html.twig',[
             'ingredient' => $ingredient,
+            'currentUser' => $user,
             'formView' => $formView
         ]);
     }

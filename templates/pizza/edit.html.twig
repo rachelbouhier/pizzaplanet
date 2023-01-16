@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier pizza{% endblock %}
+{% block body %}
+    <h1>Pizza à modifier</h1>
+
+        {{ form_start(formView) }}
+        {{ form_errors(formView) }}
+
+        <div class="row">
+            <div class="col pb-3">
+                {{ form_row(formView.name) }}
+                <div class="pb-3"></div>
+                {{ form_row(formView.photo) }}
+                <div class="pb-3"></div>
+                {{ form_row(formView.price) }}
+                <div class="pb-3"></div>
+                {{ form_row(formView.ingredients) }}
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Modifier</button>
+        
+        {{ form_end(formView) }}
+    
+
+
+{% endblock %}
