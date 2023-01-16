@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\PizzaType;
+use App\Repository\PizzaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +16,7 @@ class PizzaController extends AbstractController
     #[Route('/admin/pizza/create', name: 'pizza_create')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(PizzaType::class);    
 
         $form->handleRequest($request);
@@ -29,7 +32,45 @@ class PizzaController extends AbstractController
         $formView = $form->createView();
         
         return $this->render('pizza/create.html.twig', [
-            'formView' => $formView
+            'formView' => $formView,
+            'currentUser' => $user
         ]);
+    }
+
+    #[Route('/admin/pizza/{id}/edit', name: 'pizza_edit')]
+    public function edit(string $id = null, PizzaRepository $pizzaRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+
+        $pizza = $pizzaRepository->find($id);
+
+        $form = $this->createForm(pizzaType::class, $pizza);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $em->flush();
+
+            return $this->redirectToRoute('dashboard_show');
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('pizza/edit.html.twig',[
+            'pizza' => $pizza,
+            'formView' => $formView,
+            'currentUser' => $user
+        ]);
+    }
+
+    #[Route('/admin/pizza/{id}/delete', name: 'pizza_delete')]
+    public function delete(string $id, PizzaRepository $pizzaRepository, EntityManagerInterface $em): Response
+    {
+        $pizza = $pizzaRepository->find($id);
+        
+        $em->remove($pizza);
+        $em->flush();
+
+        return $this->redirectToRoute('dashboard_show');
     }
 }
