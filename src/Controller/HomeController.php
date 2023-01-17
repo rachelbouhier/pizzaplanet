@@ -24,6 +24,7 @@ class HomeController extends AbstractController {
                 'currentUser' => $user
             ]);
         }
+        
         return $this->render('home.html.twig', [
             'pizzas' => $pizzas,
             'currentUser' => $user
