@@ -2,17 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Pizza;
-use App\Entity\Ingredient;
 use App\Repository\IngredientRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceAttr;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class DashboardIngredientType extends AbstractType
+class RetrieveIngredientIdType extends AbstractType
 {
     protected $ingredientRepository;
 

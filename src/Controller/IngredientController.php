@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Form\IngredientType;
-use App\Form\DashboardIngredientType;
+use App\Form\RetrieveIngredientIdType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +42,7 @@ class IngredientController extends AbstractController
     public function getIdToEdit(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(DashboardIngredientType::class);
+        $form = $this->createForm(RetrieveIngredientIdType::class);
 
         $form->handleRequest($request);
 
@@ -90,7 +90,7 @@ class IngredientController extends AbstractController
     public function getIdToDelete(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(DashboardIngredientType::class);
+        $form = $this->createForm(RetrieveIngredientIdType::class);
 
         $form->handleRequest($request);
 
