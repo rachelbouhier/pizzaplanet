@@ -5,11 +5,14 @@
 
 {% block body %}
 
+{{ form_start(loginFormView) }}
+{{ form_errors(loginFormView) }}
+
 <h1>Bienvenue chez Pizza Planet</h1>
 <div class="row mb-2">
     {{ form_row(loginFormView.email) }}
 </div>
-{{ form_row(loginFormView.password) }}
+    {{ form_row(loginFormView.password) }}
 <button type="submit" class="btn btn-primary btn-sm mt-2">Connexion</button>
 {{ form_end(loginFormView) }}
 
