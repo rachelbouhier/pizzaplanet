@@ -1,11 +1,11 @@
 Pour setup le projet sur son poste :
 
 - Faire un `git clone` du repository
-- Lancer le serveur interne de Symfony via la commande `symfony serve`
+- Lancer le serveur interne de Symfony via la commande `symfony serve -d`
 - Lancer le serveur Mysql via la commande `sudo service mysql start`
 - Pour créer la BDD,  exécuter la commande `php bin/console d:d:c`
 - Pour peupler la  BDD avec les tables, exécuter la commande `php bin/console d:m:m`
-- Pour charger les fixtures de la BDD, `php bin/console d:f:l`
+- Pour charger les fixtures de la BDD, `php bin/console d:f:l --no-interaction`
 
 
 Pour se login, 2 comptes :
