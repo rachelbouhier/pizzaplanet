@@ -6,12 +6,11 @@
 {% block body %}
 
 <h1>Bienvenue chez Pizza Planet</h1>
-
-{{ form_start(loginFormView) }}
-
-{{ form_widget(loginFormView) }}
-
-<button type="submit" class="btn btn-primary btn-sm">Connexion</button>
+<div class="row mb-2">
+    {{ form_row(loginFormView.email) }}
+</div>
+{{ form_row(loginFormView.password) }}
+<button type="submit" class="btn btn-primary btn-sm mt-2">Connexion</button>
 {{ form_end(loginFormView) }}
 
 {% endblock %}
