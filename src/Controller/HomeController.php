@@ -19,6 +19,11 @@ class HomeController extends AbstractController {
             return $this->render('login.html.twig', []);
         }
         
+        if (in_array("ROLE_ADMIN", $user->getRoles())) {
+            return $this->render('dashboard.html.twig', [
+                'currentUser' => $user
+            ]);
+        }
         return $this->render('home.html.twig', [
             'pizzas' => $pizzas,
             'currentUser' => $user
