@@ -5,19 +5,18 @@
     <h1>Ingrédient à supprimer</h1>
 
         {{ form_start(formView) }}
-        {{ form_errors(formView) }} 
+        {{ form_errors(formView) }}
 
-        <div class="row">
-            <div class="col pb-3">
-                {# {{ form_row(formView.name) }} #}
-            </div>
-            <div class="col"></div>
+        <div class="row mt-3 mb-3">
+        <div class="col">
+            {{ form_widget(formView.ingredient) }}   
+        </div>
+        <div class="col">
+        </div>    
         </div>
 
         <button type="submit" class="btn btn-primary">Supprimer</button>
         
-        {# {{ form_end(formView) }} #}
+        {{ form_end(formView) }}
     
-
-
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Pizza;
 use App\Repository\IngredientRepository;
 use App\Repository\PizzaRepository;
+use App\Services\PizzaPriceCalculator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 

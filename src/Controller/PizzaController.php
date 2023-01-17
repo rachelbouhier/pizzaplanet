@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\PizzaType;
+use App\Form\RetrievePizzaIdType;
 use App\Repository\PizzaRepository;
 use App\Services\PizzaPriceCalculator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,6 +43,28 @@ class PizzaController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/pizza/edit', name: 'pizza_getIdToEdit')]
+    public function getIdToEdit(string $id = null, PizzaRepository $pizzaRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(RetrievepizzaIdType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $id = ($form->getData()['pizza']);
+        
+            return $this->redirectToRoute('pizza_edit', ['id' => $id]);
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('pizza/idToEdit.html.twig', [
+            'formView' => $formView,
+            'currentUser' => $user
+        ]);
+    }
+
     #[Route('/admin/pizza/{id}/edit', name: 'pizza_edit')]
     public function edit(string $id = null, PizzaRepository $pizzaRepository, PizzaPriceCalculator $pizzaPriceCalculator, Request $request, EntityManagerInterface $em): Response
     {
@@ -66,6 +89,28 @@ class PizzaController extends AbstractController
 
         return $this->render('pizza/edit.html.twig',[
             'pizza' => $pizza,
+            'formView' => $formView,
+            'currentUser' => $user
+        ]);
+    }
+
+    #[Route('/admin/pizza/delete', name: 'pizza_getIdToDelete')]
+    public function getIdToDelete(string $id = null, pizzaRepository $pizzaRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(RetrievePizzaIdType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $id = ($form->getData()['pizza']);
+        
+            return $this->redirectToRoute('pizza_delete', ['id' => $id]);
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('pizza/idToDelete.html.twig', [
             'formView' => $formView,
             'currentUser' => $user
         ]);

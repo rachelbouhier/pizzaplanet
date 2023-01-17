@@ -31,6 +31,9 @@ class PizzaType extends AbstractType
             ])
             ->add('price', MoneyType::class, [
                 'label' => 'Prix de la pizza',
+                'attr' => [
+                    'placeholder' => 'Le prix se calcule automatiquement en fonction des ingrédients'
+                ],
                 'disabled' => true
             ])
             ->add('ingredients', EntityType::class, [

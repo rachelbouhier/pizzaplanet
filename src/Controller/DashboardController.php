@@ -12,23 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DashboardController extends AbstractController
 {
     #[Route('/admin/dashboard', name: 'dashboard_show')]
-    public function show(Request $request): Response
+    public function show(): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(DashboardIngredientType::class);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $id = ($form->getData()['ingredient']);
-            
-            return $this->redirectToRoute('ingredient_delete', ['id' => $id]);
-        }
-
-        $formView = $form->createView();
 
         return $this->render('dashboard.html.twig', [
-            'formView' => $formView,
             'currentUser' => $user
         ]);
     }
