@@ -30,9 +30,7 @@ class DashboardIngredientType extends AbstractType
         $builder
             ->add('ingredient', ChoiceType::class, [
             'label' => 'Modifier ou supprimer un ingrédient',
-            'placeholder' => 'Choisissez l\'ingrédient à modifier ou supprimer',
             'choices' => $options,
             ]);
-            // ->add('save', SubmitType::class, ['label' => 'Create Task']);
     }
 }

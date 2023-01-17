@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\IngredientType;
+use App\Form\DashboardIngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,28 @@ class IngredientController extends AbstractController
         $formView = $form->createView();
         
         return $this->render('ingredient/create.html.twig', [
+            'formView' => $formView,
+            'currentUser' => $user
+        ]);
+    }
+
+    #[Route('/admin/ingredient/edit', name: 'ingredient_getId')]
+    public function getId(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(DashboardIngredientType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $id = ($form->getData()['ingredient']);
+        
+            return $this->redirectToRoute('ingredient_edit', ['id' => $id]);
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('ingredient/idToEdit.html.twig', [
             'formView' => $formView,
             'currentUser' => $user
         ]);
