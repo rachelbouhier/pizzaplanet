@@ -38,8 +38,8 @@ class IngredientController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/ingredient/edit', name: 'ingredient_getId')]
-    public function getId(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
+    #[Route('/admin/ingredient/edit', name: 'ingredient_getIdToEdit')]
+    public function getIdToEdit(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(DashboardIngredientType::class);
@@ -83,6 +83,28 @@ class IngredientController extends AbstractController
             'ingredient' => $ingredient,
             'currentUser' => $user,
             'formView' => $formView
+        ]);
+    }
+
+    #[Route('/admin/ingredient/delete', name: 'ingredient_getIdToDelete')]
+    public function getIdToDelete(string $id = null, IngredientRepository $ingredientRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(DashboardIngredientType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $id = ($form->getData()['ingredient']);
+        
+            return $this->redirectToRoute('ingredient_delete', ['id' => $id]);
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('ingredient/idToDelete.html.twig', [
+            'formView' => $formView,
+            'currentUser' => $user
         ]);
     }
 
