@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\PizzaType;
 use App\Repository\PizzaRepository;
+use App\Services\PizzaPriceCalculator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PizzaController extends AbstractController
 {
     #[Route('/admin/pizza/create', name: 'pizza_create')]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, PizzaPriceCalculator $pizzaPriceCalculator, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(PizzaType::class);    
@@ -23,6 +23,11 @@ class PizzaController extends AbstractController
 
         if ($form->isSubmitted()) {
             $pizza = $form->getData();
+            
+            $pizzaPrice = $pizzaPriceCalculator->calculate($pizza);
+
+            $pizza->setPrice($pizzaPrice);
+
             $em->persist($pizza);
             $em->flush();
 
@@ -38,7 +43,7 @@ class PizzaController extends AbstractController
     }
 
     #[Route('/admin/pizza/{id}/edit', name: 'pizza_edit')]
-    public function edit(string $id = null, PizzaRepository $pizzaRepository, Request $request, EntityManagerInterface $em): Response
+    public function edit(string $id = null, PizzaRepository $pizzaRepository, PizzaPriceCalculator $pizzaPriceCalculator, Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
 
@@ -49,6 +54,9 @@ class PizzaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            $pizzaPrice = $pizzaPriceCalculator->calculate($pizza);
+
+            $pizza->setPrice($pizzaPrice);
             $em->flush();
 
             return $this->redirectToRoute('dashboard_show');
